@@ -1,0 +1,241 @@
+@media only screen and (max-width: 650px){
+    .note, .right-block{
+        visibility:hidden;
+    }
+    .all-posts, .content-block{ margin:0; }
+    .block{
+        align-items: center;
+    }
+    .post{
+        width:96vw !important;
+    }
+    .header,#menu{
+        width: 100vw;
+        height: 50px;
+    }
+    .links{
+    height: 45px;
+    margin-top: 10px;
+    font-size:25px;
+    color:#00000075;
+    margin-right: 40px;
+    }
+    #profile-header {
+    height: 130px;
+    width:100vw;
+}
+    .button{
+        height:60px;
+        width:60px;
+    }
+    .text {
+    -webkit-line-clamp: 3;}
+    .setting {
+        margin-right: 10px;
+        opacity: 0.6;
+    }
+}
+@media only screen and (max-width: 360px){
+    .logo {
+      font-size: 30px;
+    }
+    #button1, #button2{
+        width: 50px;
+        height: 50px;
+    }
+}
+@media only screen and (max-width: 450px){
+    .setting{
+        width: 30px;
+        height: 30px;
+    }
+    #block-links{
+        margin-left: 7%;
+    }
+}
+@media only screen and (min-width: 650px) and (max-device-width: 840px){
+    .border-note{
+      width: 25%;
+    }
+}
+/* setting */
+@media only screen and (max-width: 560px){
+    .setting-content{
+       width: 90vw;
+    }
+    .setting-note, .setting-theme, .setting-profile-header, #logout{
+        font-size:22px;
+    }
+}
+@media only screen and (min-width: 480px) and (max-device-width: 560px){
+     .setting-note, .setting-theme, .setting-profile-header, #logout{
+        font-size:22px;
+    }
+}
+@media only screen and (min-width: 390px) and (max-device-width: 480px){
+     .setting-note, .setting-theme, .setting-profile-header, #logout{
+        font-size:18px;
+    }
+}
+@media only screen and (min-width: 370px) and (max-width: 390px){
+    .setting-note, .setting-theme, .setting-profile-header, #logout{
+        font-size:16px;
+    }
+}
+@media only screen and (max-width: 370px){
+    .setting-note, .setting-theme, .setting-profile-header, #logout{
+        font-size:14px;
+    }
+}
+@media only screen and (min-width: 560px) and (max-device-width: 980px){
+    #post-setting{
+      margin-left: 20px;
+
+    }
+    .setting-content{
+       width: max-content;
+    }
+}
+/* Login */
+@media only screen and (max-width: 610px){
+    .p{
+        font-size: 20vw;
+    }
+    .p2 {
+    font-size: 6vw;}
+    /* Gallery */
+    .gallery-border{
+        width: 100vw;
+    }
+    .image{
+        width: 30vw;
+        height: 30vw;
+        background-size: 30vw 30vw;
+    }
+}
+/* Gallery */
+@media only screen and (min-width: 580px) and (max-device-width: 700px){
+    .view_image {
+        height: 40vw;
+        width: 60vw;
+        background-size: 60vw 40vw;
+
+    }
+    #close-image{
+        margin-left: 80vw;
+    }
+}
+@media only screen and (min-width: 480px) and (max-device-width: 580px){
+    .view_image {
+        height: 50vw;
+        width: 70vw;
+        background-size: 70vw 50vw;
+
+    }
+    #close-image{
+        margin-left: 80vw;
+    }
+}
+@media only screen and (max-device-width: 480px){
+    .view_image {
+        height: 50vw;
+        width: 90vw;
+        background-size: 90vw 50vw;
+
+    }
+    #close-image{
+        margin-left: 80vw;
+    }
+}
+/* Goals */
+@media only screen and (max-device-width: 800px){
+    #myUL, .add-goals{
+        width:90vw;
+    }
+}
+/* Post */
+@media only screen and (min-width: 950px){
+    .block_text{
+        width: 70vw !important;
+    }
+    #post_image{
+        height: 250px;
+        width: 500px;
+    }
+}
+@media only screen and (min-width: 770px) and (max-device-width: 950px){
+    .block_text{
+        width: 70vw !important;
+    }
+     #post_image{
+        height: 250px;
+        width: 500px;
+    }
+}
+@media only screen and (min-width: 600px)  and (max-device-width: 770px){
+    .block_text{
+        width: 80vw !important;
+    }
+     #post_image{
+        height: 250px;
+        width: 500px;
+    }
+}
+@media only screen and (min-width: 450px) and (max-device-width: 600px){
+    .block_text{
+        width: 90vw !important;
+    }
+    h1 {
+        font-size:35px !important;
+    }
+    .detail-button{
+        width: 80px !important;
+    }
+    #post_image{
+        height: 250px;
+        width:90%;
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 450px){
+    .block_text{
+        width: 90vw !important;
+    }
+    h1 {
+        font-size:30px !important;
+    }
+    .detail-button{
+        width: 70px !important;
+        font-size: 18px !important;
+    }
+     #post_image{
+        height: 250px;
+        width:100%;
+    }
+}
+@media only screen and (max-width: 360px){
+    .block_text{
+        width: 90vw !important;
+    }
+    h1 {
+        font-size:25px !important;
+    }
+    .detail-button{
+        width: 60px !important;
+        font-size: 14px !important;
+    }
+    #post_image{
+        height: 250px;
+        width:100%;
+    }
+}
+/* new post */
+    @media only screen and (min-width: 450px) and (max-width: 700px){
+        #id_text{
+            width:70%;
+        }
+    }
+    @media only screen and (max-width: 450px){
+        #id_text{
+            width:90%;
+        }
+    }

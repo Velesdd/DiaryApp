@@ -1,0 +1,74 @@
+body{
+    background-color: #495057 !important;
+}
+.header, #menu, .post, .setting-content {
+    background-color: #535b63;
+}
+.logo {
+    color: #ffffff59;
+}
+.setting{
+    opacity: 0.6;
+}
+#profile-header{
+    opacity: 0.8;
+}
+.links{
+    color: #cec4e2b5;
+}
+.links:hover {
+    color: #cec4e2b5;
+}
+#home { border-color: #cec4e2b5;}
+#gallery { border-color: #535b63;}
+#goals { border-color: #535b63;}
+.text, .note, .setting-content, #post_text{
+    color: #cccccc;
+}
+.data{
+    color: #b4b3d69c;
+}
+.m{
+    color: #e0e0e0;
+}
+a:hover {
+    color: #e0e0e0;
+}
+.border-note{
+    border-color: #adb5bd5c;
+}
+.gallery-context{
+    background-color: #495057;
+}
+#post_title, .post_date {
+    color:#dee2e6;
+}
+#edit-button, #image-post{
+    border-color: #eea5fbc2;
+    background-color: #eea5fbc2;
+}
+#image-post{
+    border-color: #eea5fb;
+    background-color: #eea5fb;
+}
+#delete-button{
+    border-color: #fb6d7be0;
+    background-color: #fb6d7be0;
+}
+#save-post{
+    border-color: #59ff7fa6;
+    background-color: #59ff7fa6;
+}
+h2{
+color: #d7dbde;
+}
+#id_title, #id_text{
+    background-color: #eaeaea;
+    border-radius: 10px;
+}
+#none{
+    border-color:#9E9E9E !important;
+}
+#text_none{
+    color:#cccccc9e !important;
+}

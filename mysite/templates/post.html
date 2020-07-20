@@ -1,0 +1,60 @@
+{% extends 'banotse.html' %}
+{% load static %}
+{% block style %}
+    <link href="{% static '/css/post_style.css' %}" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption&display=swap" rel="stylesheet">
+    {% if theme %}
+        <link href="{% static '/css/night_theme.css' %}" rel="stylesheet">
+    {% else %}
+        <link href="{% static '/css/light_theme.css' %}" rel="stylesheet">
+    {% endif %}
+
+{% endblock %}
+{% block links %}
+            <div id="block-links">
+                     <a class="links" id="home" href="{% url 'home' %}">Posts</a>
+                    <!--<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus" style="font-size: 45px;">+</span></a>-->
+                    <div class="links" id="gallery">Gallery</div>
+                     <div class="links" id="goals">Goals</div>
+            </div>
+{% endblock %}
+{% block content %}
+    <div class="post_details">
+        <div class="block_text">
+
+            {% if post.title %}
+                <div class="block-title">
+                    <div id="post_title">
+                        <h1>{{ post.title }}</h1>
+                    </div>
+            {% else %}
+                    <div class="block-title" style="Justify-content: flex-end;">
+            {% endif %}
+                <div style="display:flex;">
+                <a class="ed" href="{% url 'post_edit' pk=post.pk %}"> <button type="submit"  class="detail-button" id="edit-button">Edit</button></a>
+                <a class="ed" href="{% url 'post_delete' pk=post.pk %}"> <button type="submit" class="detail-button" id="delete-button">Delete</button></a>
+                </div>
+            </div>
+            <div id="post_text">
+                <p>{{ post.text }}</p>
+            </div>
+        </div>
+        {% if post.image %}
+            <div id="post_image">
+                <img src="../../media/{{post.image}}" width="100%" height="100%" style="border-radius:10px;"></div>
+        {% endif %}
+        <div class="post_date">
+            <h5>{{post.published_date.date}}</h5>
+            <h5>{{post.published_date.time}}</h5>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+        {% block script %}
+    <script src="{% static '/js/image-size.js' %}"></script>
+{% endblock %}
+{% block image %}
+    <div id="close-image" onclick="Close()">✕</div>
+    <div class="view_image"></div>
+{% endblock %}

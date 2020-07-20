@@ -1,0 +1,27 @@
+body{
+    background-color: #fff;
+}
+.header, #menu, .post {
+    background-color:white;
+}
+.logo {
+    color:#5600ff59;
+}
+.links{
+    color: #5600ffb5;
+}
+.links:hover {
+    color: #5600ffb5;
+}
+#home { border-color: #5600ffb5;}
+#gallery { border-color: white;}
+#goals { border-color: white;}
+.text, .note{
+    color:#3f464c;
+}
+.data{
+    color: #3735889c;
+}
+.border-note{
+    border-color: red rgba(170, 50, 220, .6) green;
+}

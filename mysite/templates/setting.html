@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <link href="{% static '/css/style.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link href="{% static '/css/setting_style.css' %}" rel="stylesheet">
+    <link href="{% static '/css/size.css' %}" rel="stylesheet">
+    {% if form.theme.value %}
+        <link href="{% static '/css/night_theme.css' %}" rel="stylesheet">
+    {% else %}
+        <link href="{% static '/css/light_theme.css' %}" rel="stylesheet">
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;300&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Concert+One&display=swap" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body>
+    <div class="p">
+     <div class="main">
+          <div class="header">
+                <a class="logo" href="{% url 'home' %}">
+                    memories never die
+                </a>
+                <div class="right-part">
+                    <a class="setting" href=""></a>
+                </div>
+          </div>
+         <div class="setting-content">
+             <form method="POST" class="post-form" id="post-setting" enctype="multipart/form-data" style="align-items: start;">{% csrf_token %}
+             <div class="setting-note">
+                 <div style="margin-right:20px;">Hide note:</div>
+                 <label class="switch">
+                    {{ form.hidden_note }}
+                    <span class="slider round" id="slider-note"></span>
+                 </label>
+             </div>
+             <div class="setting-profile-header">
+                    <div style="margin-bottom:10px;">Change header:</div>
+                    {{ form.wallpaper }}
+             </div>
+             <div class="setting-theme">
+                    <div style="margin-right:20px;">Night theme:</div>
+                    <label class="switch">
+                        {{ form.theme }}
+                        <span class="slider round" id="slider-theme"></span>
+                    </label>
+             </div>
+             <button type="submit"  class="detail-button" id="edit-button">Edit</button></a>
+             </form>
+            <a href="{% url 'logout' %}" id="logout">Logout</a>
+         </div>
+     </div>
+     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+         <script src="{% static '/js/index.js' %}"></script>
+</body>
+</html>

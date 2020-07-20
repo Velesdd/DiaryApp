@@ -1,0 +1,27 @@
+{% extends 'banotse.html' %}
+{% load static %}
+{% block style %}
+    <link href="{% static '/css/new_post.css' %}" rel="stylesheet">
+    {% if theme %}
+        <link href="{% static '/css/night_theme.css' %}" rel="stylesheet">
+    {% else %}
+        <link href="{% static '/css/light_theme.css' %}" rel="stylesheet">
+    {% endif %}
+{% endblock %}
+{% block links %}
+            <div id="block-links">
+                     <a class="links" id="home" href="{% url 'home' %}">Posts</a>
+            </div>
+{% endblock %}
+{% block content %}
+    <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.title }}
+        {{ form.text }}
+        <div class="button-wrap">
+            <label class ="new-button" for="id_image" id="image-post">choose a file</label>
+            {{ form.image }}
+        </div>
+        <div id="file-name" style="margin-bottom: 10px;"></div>
+        <button type="submit" class="save btn btn-default" id="save-post" style="border-color: #28a745;">Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,95 @@
+.header {
+    visibility: hidden;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+.block{
+        align-items: center !important;
+}
+.post_details{
+        width: 100vw;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 3;
+        position: absolute;
+        visibility: visible;
+        height: auto;
+}
+.block_text{
+        margin: 30px 0 0 0;
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+}
+#post_title{
+    color: black;
+}
+h1{
+    font-size:40px;
+}
+.block-title{
+    display:flex;
+    flex-direction: row;
+    Justify-content: space-between;
+    margin-bottom: 20px;
+}
+#post_text{
+    color: gray;
+    font-size:18px;
+   font-family: 'Noto Sans SC', sans-serif;
+   margin-bottom:10px;
+}
+#post_image {
+    border: none;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: 500px 250px;
+    margin-bottom:20px;
+}
+.post_date{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+h5 {
+    margin-right: 50px;
+}
+.detail-button{
+     display: inline-block;
+    padding: 2px 4px 2px 4px;
+    width: 100px;
+    height:40px;
+    cursor: pointer;
+    border: 2px solid;
+    text-align: center;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 20px;
+    color: black;
+    font-family: 'Noto Sans SC', sans-serif;
+    margin-left: 15px;
+}
+#edit-button{
+    border-color: #9c27b0;
+}
+#delete-button{
+    border-color: #dc3545;
+}
+.ed{
+margin-right:10px;
+display: flex;
+}
+
+.header, #profile-header {
+    height:0px;
+}
+.content-block, .note, .border-note{
+    visibility: hidden !important;
+}
+.detail-button:focus{
+    outline: none;
+}
