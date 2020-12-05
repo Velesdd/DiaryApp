@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', StartPage.as_view(), name='log_in'),
     path('home/', Home.as_view(), name="home"),
+    path('home/ajax', views.home_ajax, name="home_ajax"),
     path('setting/', SettingFunc.as_view(), name="setting"),
     path('gallery/', views.gallery, name="gallery"),
     path('post/new/', views.post_new, name='post_new'),

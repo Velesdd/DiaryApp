@@ -24,6 +24,18 @@ $(document).on('click', '.addBtn', function(){
         }
     });
 });
+$(document).on('click', '.close', function(){
+    id = $(this).attr('id')
+    id = id.slice(6)
+    $.ajax({
+        type: "POST",
+        url: "http://127.0.0.1:8000/goal/delete/",
+        data: {goal_id: id},
+        success: function (data) {
+         $('#goal_'+id).remove();
+        }
+    });
+});
 $(document).on('click', 'li', function(){
     id = $(this).attr('id')
     id = id.slice(5)
@@ -35,7 +47,6 @@ $(document).on('click', 'li', function(){
     else{
         goal_done = false
     }
-    console.log(goal_done)
     $.ajax({
         type: "POST",
         url: "http://127.0.0.1:8000/goal/edit/",
@@ -73,8 +84,8 @@ let SendNote = () => {
         $('.note').text(text_value);
         }
     });
-  document.getElementById('new-note').value = ""
-  document.getElementsByClassName("border-note")[0].style.visibility=  'visible'
+    document.getElementById('new-note').value = ""
+    document.getElementsByClassName("border-note")[0].style.visibility=  'visible'
     document.getElementsByClassName("note")[0].style.visibility=  'visible'
     document.getElementById('new-note').style.visibility =  'hidden'
     document.getElementById('close-note').style.visibility =  'hidden'
@@ -86,13 +97,11 @@ let ChangeButtonColor = () => {
     if(document.getElementById('id-image').val()){
     document.getElementsByClassName('new-button')[0].style.background = 'white'
     }
-    console.log(2)
 }
 $("#id_image").change(function() {
     if(document.getElementById('id_image').value){
     document.getElementsByClassName('new-button')[0].style.background = '#9c27b0'
     var filename = $('#id_image')[0].files[0]['name']
-    console.log(filename)
     }
 });
 $(document).on('click', '#home', function(){
@@ -110,7 +119,6 @@ $(document).on('click', '#home', function(){
 });
 
 $(document).on('click', '#gallery', function(){
-
     document.getElementsByClassName("block")[0].style.alignItems =  'center'
     $.ajax({
         type: "GET",
@@ -119,7 +127,6 @@ $(document).on('click', '#gallery', function(){
             var row_index=0
             var img_index=0
             all_posts = response.posts
-            console.log(all_posts)
             document.getElementsByClassName("goals-content")[0].style.visibility =  'hidden'
             color = $('.links').css("color");
             document.getElementById('gallery').style.borderColor = color
@@ -134,24 +141,21 @@ $(document).on('click', '#gallery', function(){
             if ($(".post_details").length){
                 document.getElementsByClassName("post_details")[0].style.visibility =  'hidden'
             }
-
-
         }
         });
 });
 $(document).on('click', '#posts', function(){
     document.getElementsByClassName("gallery-context")[0].style.visibility =  'hidden'
-     document.getElementsByClassName("goals-content")[0].style.visibility =  'hidden'
+    document.getElementsByClassName("goals-content")[0].style.visibility =  'hidden'
     document.getElementsByClassName("content-block")[0].style.visibility =  'visible'
     document.getElementsByClassName("note")[0].style.visibility =  'visible'
-
     document.getElementsByClassName("block")[0].style.alignItems =  'start'
 });
 $(document).on('click', '#goals', function(){
     document.getElementsByClassName("gallery-context")[0].style.visibility =  'hidden'
-     document.getElementsByClassName("content-block")[0].style.visibility =  'hidden'
-     document.getElementsByClassName("note")[0].style.visibility =  'hidden'
-     document.getElementsByClassName("border-note")[0].style.visibility =  'hidden'
+    document.getElementsByClassName("content-block")[0].style.visibility =  'hidden'
+    document.getElementsByClassName("note")[0].style.visibility =  'hidden'
+    document.getElementsByClassName("border-note")[0].style.visibility =  'hidden'
     document.getElementsByClassName("goals-content")[0].style.visibility =  'visible'
     document.getElementsByClassName("block")[0].style.alignItems =  'start'
     color = $('.links').css("color");
@@ -171,7 +175,6 @@ $(document).on('click', '.image', function(){
     }
     id = $(this).attr('id')
     id = id.slice(6)
-    console.log(id)
     image = $(this).css("background-image");
     document.getElementsByClassName("view_image")[0].style.backgroundImage = image;
     $.ajax({
@@ -187,29 +190,28 @@ $(document).on('click', '.image', function(){
                         $("#close-image").css("width", "300px");
                         $("#close-image").css("text-align", "end");
                     }
+                    else{
+                        if(screen.width<580){
+                        $(".view_image").css("height", "50vw");
+                        $(".view_image").css("width", "90vw");
+                        $("#close-image").css("width", "90vw");
+                        $(".view_image").css("background-size", "90vw 50vw");}
+                        else{
+                        $(".view_image").css("height", "30vw");
+                        $(".view_image").css("width", "50vw");
+                        $("#close-image").css("width", "50vw");
+                        $(".view_image").css("background-size", "50vw 30vw");
+                        }
+                    }
                }
          }
-    });
-});
-$(document).on('click', '.close', function(){
-    id = $(this).attr('id')
-    id = id.slice(6)
-    $.ajax({
-        type: "POST",
-        url: "http://127.0.0.1:8000/goal/delete/",
-        data: {goal_id: id},
-        success: function (data) {
-         $('#goal_'+id).remove();
-        }
     });
 });
 let scrollPos = 0
 $(window).scroll(function(){
     if(scroll_valid){
      let x = $("html").scrollTop()
-
      if(x>scrollPos){
-
         document.getElementById('button2').style.visibility=  'visible'
         document.getElementById('button1').style.visibility =  'hidden'
      }
@@ -219,12 +221,12 @@ $(window).scroll(function(){
      }
      scrollPos = x }
         });
-$(document).ready(function(){
 
+$(document).ready(function(){
  var text;
  $.ajax({
         type: "GET",
-        url: "http://127.0.0.1:8000/home/",
+        url: "http://127.0.0.1:8000/home/ajax",
         success: function (response) {
             document.getElementsByClassName("border-note")[0].style.visibility =  'visible'
             document.getElementsByClassName("note")[0].style.visibility =  'visible'
@@ -258,7 +260,6 @@ $(document).ready(function(){
                 $('#none').css("border-color", "#5f5f5f")
                 $('#none').css("border-style", "dashed")
             }
-
             setting = response.setting
             if (setting.length > 0){
                 if (setting[0].hidden_note){
@@ -276,7 +277,7 @@ $(document).ready(function(){
                     document.getElementById("profile-header").style.backgroundImage = "url('../static/img/1.png')";
                     }
                 }
-                else{
+            else{
                     if($("div").is("#profile-header")){
                         document.getElementById("profile-header").style.backgroundImage = "url('../static/img/1.png')";}
                    }
@@ -287,7 +288,6 @@ $(document).ready(function(){
                     {
                     $('.gallery-border').append('<div class="gallery-row" id="gallery-row-'+row_index+'"></div>')}
                 if(all_posts[post].image!=""){
-                     console.log(all_posts[post].image)
                      $('#gallery-row-'+row_index).append('<div class="image" id="image-'+all_posts[post].id+'" style="background-image:url(../../media/'+all_posts[post].image+');"></div>')
                      img_index++;
                  }

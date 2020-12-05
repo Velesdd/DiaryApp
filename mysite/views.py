@@ -55,50 +55,55 @@ class SettingFunc(TemplateView):
         else:
             return redirect('log_in')
 
+
 class Home(TemplateView):
     template_name = "home.html"
 
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            if request.is_ajax():
-                if request.method == 'GET':
-                    if Note.objects.filter(author=request.user.id).exists():
-                        note = Note.objects.get(author=request.user.id)
-                        text = note.text
-                    else:
-                        text = "Add your note~"
-                    if Setting.objects.filter(author=request.user.id).exists():
-                        setting = list(Setting.objects.values().filter(author=request.user.id))
-                    else:
-                        setting = ""
-                    if Goal.objects.filter(author=request.user).exists():
-                        goals = list(Goal.objects.values().filter(author=request.user).order_by('-done'))
-                    else:
-                        goals = ""
-                    if Post.objects.filter(author=request.user).exists():
-                        posts = list(Post.objects.values().filter(author=request.user))
-                    else:
-                        posts = ""
-                    return JsonResponse({'text': text, 'posts': posts, 'goals': goals, 'setting': setting})
-                if request.method == 'POST':
-                    if Note.objects.filter(author=request.user.id).exists():
-                        Note.objects.filter(author=request.user.id).delete()
-                    text = request.POST.get('text')
-                    note = Note()
-                    note.text = text
-                    note.author = request.user
-                    note.save()
-                    return HttpResponse()
             if Setting.objects.filter(author=request.user.id).exists():
                 setting = Setting.objects.get(author=request.user.id)
                 theme = setting.theme
             else:
                 theme = False
+
             return render(request, self.template_name, {'theme': theme})
 
         else:
             return redirect('log_in')
+
+
+def home_ajax(request):
+    if request.is_ajax():
+        if request.method == 'GET':
+            if Note.objects.filter(author=request.user.id).exists():
+                note = Note.objects.get(author=request.user.id)
+                text = note.text
+            else:
+                text = "Add your note~"
+            if Setting.objects.filter(author=request.user.id).exists():
+                setting = list(Setting.objects.values().filter(author=request.user.id))
+            else:
+                setting = ""
+            if Goal.objects.filter(author=request.user).exists():
+                goals = list(Goal.objects.values().filter(author=request.user).order_by('-done'))
+            else:
+                goals = ""
+            if Post.objects.filter(author=request.user).exists():
+                posts = list(Post.objects.values().filter(author=request.user))
+            else:
+                posts = ""
+            return JsonResponse({'text': text, 'posts': posts, 'goals': goals, 'setting': setting})
+        if request.method == 'POST':
+            if Note.objects.filter(author=request.user.id).exists():
+                Note.objects.filter(author=request.user.id).delete()
+            text = request.POST.get('text')
+            note = Note()
+            note.text = text
+            note.author = request.user
+            note.save()
+            return HttpResponse()
 
 
 def post_new(request):
@@ -188,9 +193,8 @@ def gallery(request):
         if request.is_ajax():
             if request.method == 'GET':
                 if Post.objects.filter(author=request.user).exists():
-                    print(222)
                     posts = list(Post.objects.values().filter(author=request.user))
-                    return HttpResponseRedirect('/home/')
+                    return JsonResponse({'posts': posts})
 
 
 @csrf_exempt
@@ -203,7 +207,6 @@ def add_goal(request):
                 goal.text = text
                 goal.author = request.user
                 goal.save()
-                print(goal.pk)
                 goal_one = list(Goal.objects.filter(pk=goal.pk).values())
                 return JsonResponse({'goal': goal_one})
     else:
@@ -215,11 +218,10 @@ def delete_goal(request):
     if request.user.is_authenticated:
         if request.is_ajax():
             if request.method == 'POST':
-                print(9)
                 goal_id = request.POST.get('goal_id')
                 goal = Goal.objects.get(id=goal_id)
                 goal.delete()
-                return HttpResponse()
+                return HttpResponseRedirect("/")
     else:
         return redirect('log_in')
 
@@ -236,7 +238,6 @@ def edit_goal(request):
                     goal.done = False
                 else:
                     goal.done = True
-                print(goal.done)
                 goal.save()
                 return HttpResponse()
     else:
