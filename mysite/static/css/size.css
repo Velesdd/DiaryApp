@@ -99,7 +99,7 @@
 /* Login */
 @media only screen and (max-width: 610px){
     .p{
-        font-size: 20vw;
+        font-size: 20vw !important;
     }
     .p2 {
     font-size: 6vw;}
@@ -115,7 +115,7 @@
 }
 /* Gallery */
 @media only screen and (min-width: 580px) and (max-device-width: 700px){
-    .view_image {
+   /* .view_image {
         height: 40vw;
         width: 60vw;
         background-size: 60vw 40vw;
@@ -123,10 +123,10 @@
     }
     #close-image{
         margin-left: 80vw;
-    }
+    }*/
 }
 @media only screen and (min-width: 480px) and (max-device-width: 580px){
-    .view_image {
+    /*.view_image {
         height: 50vw;
         width: 70vw;
         background-size: 70vw 50vw;
@@ -134,10 +134,10 @@
     }
     #close-image{
         margin-left: 80vw;
-    }
+    }*/
 }
 @media only screen and (max-device-width: 480px){
-    .view_image {
+   /* .view_image {
         height: 50vw;
         width: 90vw;
         background-size: 90vw 50vw;
@@ -145,44 +145,61 @@
     }
     #close-image{
         margin-left: 80vw;
-    }
+    }*/
 }
 /* Goals */
-@media only screen and (max-device-width: 800px){
+@media only screen and (max-device-width: 580px){
+    #myUL{
+        width:100vw;
+    }
+    .add-goals{
+        width:90vw;
+    }
+}
+@media only screen and (min-device-width: 580px) and (max-device-width: 800px){
     #myUL, .add-goals{
         width:90vw;
     }
 }
 /* Post */
-@media only screen and (min-width: 950px){
-    .block_text{
-        width: 70vw !important;
+@media only screen and (min-width: 1050px){
+    .post_details{
+        width: 60vw !important;
     }
     #post_image{
-        height: 250px;
-        width: 500px;
+        /*height: 250px !important;*/
+        /*width: 500px !important;*/
     }
 }
-@media only screen and (min-width: 770px) and (max-device-width: 950px){
-    .block_text{
-        width: 70vw !important;
+@media only screen and (max-width: 880px){
+    .text_and_image{
+        display:block !important;
+    }
+    #post_image{
+        margin: auto !important;
+    }
+    #post_text{
+        width:auto !important;
+        margin:0 !important;
+    }
+}
+@media only screen and (min-width: 770px) and (max-device-width: 1050px){
+    .post_details{
+        width: 60vw !important;
     }
      #post_image{
-        height: 250px;
-        width: 500px;
+       /* height: 250px !important;
+        width: 500px !important;*/
     }
 }
 @media only screen and (min-width: 600px)  and (max-device-width: 770px){
-    .block_text{
+    .post_details{
         width: 80vw !important;
     }
-     #post_image{
-        height: 250px;
-        width: 500px;
-    }
+
 }
 @media only screen and (min-width: 450px) and (max-device-width: 600px){
-    .block_text{
+    .post_details{
         width: 90vw !important;
     }
     h1 {
@@ -191,13 +208,13 @@
     .detail-button{
         width: 80px !important;
     }
-    #post_image{
-        height: 250px;
-        width:90%;
-    }
+   /* #post_image{
+        height: 250px !important;
+        width:90% !important;
+    }*/
 }
 @media only screen and (min-width: 360px) and (max-width: 450px){
-    .block_text{
+    .post_details{
         width: 90vw !important;
     }
     h1 {
@@ -207,13 +224,10 @@
         width: 70px !important;
         font-size: 18px !important;
     }
-     #post_image{
-        height: 250px;
-        width:100%;
-    }
+
 }
 @media only screen and (max-width: 360px){
-    .block_text{
+    .post_details{
         width: 90vw !important;
     }
     h1 {
@@ -223,10 +237,7 @@
         width: 60px !important;
         font-size: 14px !important;
     }
-    #post_image{
-        height: 250px;
-        width:100%;
-    }
+
 }
 /* new post */
     @media only screen and (min-width: 450px) and (max-width: 700px){

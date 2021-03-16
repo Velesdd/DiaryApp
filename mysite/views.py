@@ -74,6 +74,7 @@ class Home(TemplateView):
             return redirect('log_in')
 
 
+@csrf_exempt
 def home_ajax(request):
     if request.is_ajax():
         if request.method == 'GET':
@@ -132,15 +133,6 @@ def post_new(request):
 def post_detail(request, pk):
     template_name = "post.html"
     if request.user.is_authenticated:
-        if request.is_ajax():
-            if request.method == 'GET':
-                post = Post.objects.get(pk=pk)
-                image = post.image
-                if image:
-                    im = Image.open(image)
-                    (width, height) = im.size
-                    return JsonResponse({'width': width, 'height': height})
-                return JsonResponse({'width': 0, 'height': 0})
         post = get_object_or_404(Post, pk=pk)
         if Setting.objects.filter(author=request.user.id).exists():
             setting = Setting.objects.get(author=request.user.id)
@@ -150,6 +142,18 @@ def post_detail(request, pk):
         return render(request, template_name, {'post': post, 'theme': theme})
     else:
         return redirect('log_in')
+
+
+def image_ajax(request, pk):
+    if request.is_ajax():
+        if request.method == 'GET':
+            post = Post.objects.get(pk=pk)
+            image = post.image
+            if image:
+                im = Image.open(image)
+                (width, height) = im.size
+                return JsonResponse({'width': width, 'height': height})
+            return JsonResponse({'width': 0, 'height': 0})
 
 
 def post_edit(request, pk):
@@ -195,7 +199,8 @@ def gallery(request):
                 if Post.objects.filter(author=request.user).exists():
                     posts = list(Post.objects.values().filter(author=request.user))
                     return JsonResponse({'posts': posts})
-
+                else:
+                    return HttpResponse()
 
 @csrf_exempt
 def add_goal(request):

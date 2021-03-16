@@ -1,8 +1,10 @@
 body{
-    background-color: #fff;
+    /*background-color: #fff;*/
+    background-color: #f3dfe842;
 }
 .header, #menu, .post {
-    background-color:white;
+    /*background-color:white;*/
+    background-color: #ffffffb3;
 }
 .logo {
     color:#5600ff59;
@@ -14,8 +16,8 @@ body{
     color: #5600ffb5;
 }
 #home { border-color: #5600ffb5;}
-#gallery { border-color: white;}
-#goals { border-color: white;}
+#gallery { border-color: #ffffffb3;}
+#goals { border-color: #ffffffb3;}
 .text, .note{
     color:#3f464c;
 }

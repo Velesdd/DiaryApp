@@ -20,8 +20,8 @@
             </div>
 {% endblock %}
 {% block content %}
-    <div class="post_details">
-        <div class="block_text">
+    <div class="post_details" id="{{ post.id }}">
+        <!--<div class="block_text">-->
 
             {% if post.title %}
                 <div class="block-title">
@@ -36,18 +36,21 @@
                 <a class="ed" href="{% url 'post_delete' pk=post.pk %}"> <button type="submit" class="detail-button" id="delete-button">Delete</button></a>
                 </div>
             </div>
-            <div id="post_text">
-                <p>{{ post.text }}</p>
-            </div>
-        </div>
-        {% if post.image %}
-            <div id="post_image">
-                <img src="../../media/{{post.image}}" width="100%" height="100%" style="border-radius:10px;"></div>
-        {% endif %}
-        <div class="post_date">
-            <h5>{{post.published_date.date}}</h5>
+            <div class="text_and_image">
+                <div id="post_text">
+                    <p>{{ post.text }}</p>
+                    <div class="post_date">
+            <h5 style="margin-right: 50px;">{{post.published_date.date}}</h5>
             <h5>{{post.published_date.time}}</h5>
         </div>
+                </div>
+        <!--</div>-->
+                {% if post.image %}
+                    <div id="post_image">
+                        <img src="../../media/{{post.image}}" width="100%" height="100%" style="border-radius:10px;"></div>
+                {% endif %}
+            </div>
+
         </div>
     </div>
 {% endblock %}
@@ -55,6 +58,12 @@
     <script src="{% static '/js/image-size.js' %}"></script>
 {% endblock %}
 {% block image %}
-    <div id="close-image" onclick="Close()">✕</div>
-    <div class="view_image"></div>
+  <div class="background_shadow">
+  </div>
+  <div id="circle-close-image">
+        <div id="close-image" onclick="Close()">✕</div>
+    </div>
+  <div class="view_image">
+      <div id="img"></div>
+  </div>
 {% endblock %}

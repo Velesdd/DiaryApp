@@ -5,9 +5,20 @@ let Up = () => {
  }
 let Close = () => {
     document.getElementsByClassName("background_shadow")[0].style.visibility=  'hidden';
+    document.getElementsByClassName("view_image")[0].style.visibility=  'hidden';
+    document.getElementById('circle-close-image').style.visibility=  'hidden';
     document.getElementById('button1').style.visibility=  'visible'
     document.getElementById('button2').style.visibility =  'hidden'
     scroll_valid = true
+}
+let ChangeHeightGoalsList = () =>{
+    heightMain = $(".main").height()-20;
+    heightBody = $("body").height();
+    $(".goals-content").css("height", heightBody - heightMain+"px");
+    if($(".goals-content").height()<$("#myUL").height())
+        $(".list-goals").css("height", "max-content");
+    else
+        $(".list-goals").css("height", "inherit");
 }
 $(document).on('click', '.addBtn', function(){
     var value = $('#myInput').val();
@@ -17,10 +28,12 @@ $(document).on('click', '.addBtn', function(){
         data: {text: value},
         success: function (response) {
                     goal = response.goal
-                    $('#myUL').prepend('<li id="goal_'+goal[0].id+'"></li>')
+                    $('#myUL').append('<div id="div_goal_'+goal[0].id+'" class="div_goal"></div>')
+                    $('#div_goal_'+goal[0].id).append('<li id="goal_'+goal[0].id+'"></li>')
                     $('#goal_'+goal[0].id).text(goal[0].text)
-                    $('#goal_'+goal[0].id).append('<span class="close" id="close_'+goal[0].id+'">✕</li>')
+                    $('#div_goal_'+goal[0].id).append('<span class="close" id="close_'+goal[0].id+'">✕</li>')
                     $("#myInput").val('');
+                    ChangeHeightGoalsList();
         }
     });
 });
@@ -32,7 +45,8 @@ $(document).on('click', '.close', function(){
         url: "http://127.0.0.1:8000/goal/delete/",
         data: {goal_id: id},
         success: function (data) {
-         $('#goal_'+id).remove();
+         $('#div_goal_'+id).remove();
+         ChangeHeightGoalsList();
         }
     });
 });
@@ -78,11 +92,14 @@ let SendNote = () => {
   var text_value = $('#new-note').val();
   $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8000/home/",
+        url: "http://127.0.0.1:8000/home/ajax",
         data: {text: text_value},
         success: function (data) {
         $('.note').text(text_value);
         }
+//        error: function (){
+//            console.log(313)
+//        }
     });
     document.getElementById('new-note').value = ""
     document.getElementsByClassName("border-note")[0].style.visibility=  'visible'
@@ -104,22 +121,27 @@ $("#id_image").change(function() {
     var filename = $('#id_image')[0].files[0]['name']
     }
 });
-$(document).on('click', '#home', function(){
+let ClickOnHome = () => {
+    $(".content-block").css('display','flex');
+    $(".goals-content").css('display','none');
+    $(".gallery-context").css('display','none');
+    $(".post_details").css('display','none');
     color = $('.links').css("color");
     document.getElementById('home').style.borderColor = color
     color_border = $('#menu').css("background-color");
+    $(".all-posts").css("height", "fit-content");
     document.getElementById('gallery').style.borderColor = color_border
     document.getElementById('goals').style.borderColor = color_border
     document.getElementsByClassName("block")[0].style.alignItems =  'start'
-    document.getElementsByClassName("goals-content")[0].style.visibility =  'hidden'
-    document.getElementsByClassName("gallery-context")[0].style.visibility =  'hidden'
-    document.getElementsByClassName("content-block")[0].style.visibility =  'visible'
-    document.getElementsByClassName("note")[0].style.visibility =  'visible'
-    document.getElementsByClassName("border-note")[0].style.visibility =  'visible'
-});
+}
 
 $(document).on('click', '#gallery', function(){
-    document.getElementsByClassName("block")[0].style.alignItems =  'center'
+    $(".gallery-context").css('display','flex');
+    $(".gallery-row").css("height", "fit-content");
+    $(".goals-content").css('display','none');
+    $(".content-block").css('display','none');
+    $(".view_image").css('position','fixed');
+    $(".background_shadow").css('position','fixed');
     $.ajax({
         type: "GET",
         url: "http://127.0.0.1:8000/gallery/",
@@ -127,19 +149,15 @@ $(document).on('click', '#gallery', function(){
             var row_index=0
             var img_index=0
             all_posts = response.posts
-            document.getElementsByClassName("goals-content")[0].style.visibility =  'hidden'
             color = $('.links').css("color");
-            document.getElementById('gallery').style.borderColor = color
+            $("#gallery").css('border-color',color);
             color_border = $('#menu').css("background-color");
-            document.getElementById('home').style.borderColor = color_border
-            document.getElementById('goals').style.borderColor = color_border
-            document.getElementsByClassName("content-block")[0].style.visibility =  'hidden'
-            document.getElementsByClassName("note")[0].style.visibility =  'hidden'
-            document.getElementsByClassName("border-note")[0].style.visibility =  'hidden'
-            document.getElementById('menu').style.marginBottom =  '10px'
-            document.getElementsByClassName("gallery-context")[0].style.visibility =  'visible'
+            $("#home").css('border-color',color_border);
+            $("#goals").css('border-color',color_border);
+            $("#menu").css('margin-bottom','10px');
+            $(".gallery-context").css('visibility','visible');
             if ($(".post_details").length){
-                document.getElementsByClassName("post_details")[0].style.visibility =  'hidden'
+                $(".post_details").css('display','none');
             }
         }
         });
@@ -150,59 +168,76 @@ $(document).on('click', '#posts', function(){
     document.getElementsByClassName("content-block")[0].style.visibility =  'visible'
     document.getElementsByClassName("note")[0].style.visibility =  'visible'
     document.getElementsByClassName("block")[0].style.alignItems =  'start'
+     $(".all-posts").css("height", "fit-content");
 });
 $(document).on('click', '#goals', function(){
-    document.getElementsByClassName("gallery-context")[0].style.visibility =  'hidden'
-    document.getElementsByClassName("content-block")[0].style.visibility =  'hidden'
-    document.getElementsByClassName("note")[0].style.visibility =  'hidden'
-    document.getElementsByClassName("border-note")[0].style.visibility =  'hidden'
-    document.getElementsByClassName("goals-content")[0].style.visibility =  'visible'
-    document.getElementsByClassName("block")[0].style.alignItems =  'start'
+    $(".goals-content").css('display','flex');
+    $(".all-posts").css("height", "0px");
+    $(".gallery-row").css("height", "0px");
+    ChangeHeightGoalsList();
+    $(".gallery-context").css('display','none');
+    $(".content-block").css('display','none');
+    $(".goals-content").css('visibility','visible');
+    $(".block").css('align-items','start');
     color = $('.links').css("color");
-    document.getElementById('goals').style.borderColor = color
+    $("#goals").css('border-color',color);
     color_border = $('#menu').css("background-color");
-    document.getElementById('home').style.borderColor = color_border
-    document.getElementById('gallery').style.borderColor = color_border
-    document.getElementById('menu').style.margin =  '0px'
-    document.getElementsByClassName("post_details")[0].style.visibility =  'hidden'
+    $("#home").css('border-color',color_border);
+    $("#gallery").css('border-color',color_border);
+    $("#menu").css('margin','0px');
+    $(".view_image").css('position','absolute');
+    $(".background_shadow").css('position','absolute');
+    $(".post_details").css('display','none');
 });
 $(document).on('click', '.image', function(){
     scroll_valid = false
-    document.getElementsByClassName("background_shadow")[0].style.visibility=  'visible';
+    $(".background_shadow").css('visibility','visible');
+    $(".view_image").css('visibility','visible');
+    $("#circle-close-image").css('visibility','visible');
     if (document.getElementById('button2')){
-        document.getElementById('button2').style.visibility=  'hidden'
-        document.getElementById('button1').style.visibility =  'hidden'
+        $("#button1").css('visibility','hidden');
+        $("#button2").css('visibility','hidden');
     }
     id = $(this).attr('id')
     id = id.slice(6)
     image = $(this).css("background-image");
-    document.getElementsByClassName("view_image")[0].style.backgroundImage = image;
+    $("#img").css('background-image',image);
     $.ajax({
         type: "GET",
-        url: "http://127.0.0.1:8000/post/"+id,
+        url: "http://127.0.0.1:8000/image/"+id+"/ajax",
         success: function (response) {
                if( response.width!=0 && response.height!=0){
-                    if( response.width<response.height){
-                        $(".view_image").css("height", "450px");
-                        $(".view_image").css("width", "300px");
-                        $(".view_image").css("background-size", "300px 450px");
-                        $("#close-image").css("margin", "0 0 20px 0");
-                        $("#close-image").css("width", "300px");
-                        $("#close-image").css("text-align", "end");
+                    if(screen.width<580){
+                            if(response.width<response.height){
+                                $("#img").css("height", "80%");
+                                $("#img").css("width", "80%");
+                                $("#img").css("background-size", "100% 100%");
+                                $("#img").css("margin-top", "30px");}
+                            else{
+                            if((response.width-150)>response.height){
+                                $("#img").css("height", "50vw");
+                                $("#img").css("width", "90vw");
+                                $("#img").css("background-size", "90vw 50vw");}
+                            else{
+                                $("#img").css("height", "70vw");
+                                $("#img").css("width", "90vw");
+                                $("#img").css("background-size", "90vw 100%");
+                            }
+                            }}
+                    else if(response.width<response.height){
+                        if(screen.height*0.9<response.height) response.height = screen.height*0.8;
+                        if((screen.width*0.4)<response.width) {response.width = screen.width*0.32;}
+                        $("#img").css("height", response.height+"px");
+                        $("#img").css("width", response.width+"px");
+                        $("#img").css("background-size",response.width+"px "+response.height+"px");
                     }
-                    else{
-                        if(screen.width<580){
-                        $(".view_image").css("height", "50vw");
-                        $(".view_image").css("width", "90vw");
-                        $("#close-image").css("width", "90vw");
-                        $(".view_image").css("background-size", "90vw 50vw");}
                         else{
-                        $(".view_image").css("height", "30vw");
-                        $(".view_image").css("width", "50vw");
-                        $("#close-image").css("width", "50vw");
-                        $(".view_image").css("background-size", "50vw 30vw");
+                            if(screen.width<response.width) response.width = screen.width*0.9
+                            if(screen.height*0.9<response.height) response.height = screen.height*0.8
+                            $("#img").css("height", response.height+"px");
+                            $("#img").css("width", response.width+"px");
+                            $("#img").css("background-size",response.width+"px "+response.height+"px");
                         }
-                    }
                }
          }
     });
@@ -298,9 +333,10 @@ $(document).ready(function(){
             }
             all_goals = response.goals
             for (var goal in all_goals){
-                $('#myUL').append('<li id="goal_'+all_goals[goal].id+'"></li>')
+                $('#myUL').append('<div id="div_goal_'+all_goals[goal].id+'" class="div_goal"></div>')
+                $('#div_goal_'+all_goals[goal].id).append('<li id="goal_'+all_goals[goal].id+'"></li>')
                 $('#goal_'+all_goals[goal].id).text(all_goals[goal].text)
-                $('#goal_'+all_goals[goal].id).append('<span class="close" id="close_'+all_goals[goal].id+'">✕</li>')
+                $('#div_goal_'+all_goals[goal].id).append('<span class="close" id="close_'+all_goals[goal].id+'">✕</li>')
                 if (all_goals[goal].done == false){
                     $('#goal_'+all_goals[goal].id).addClass('checked')
                 }

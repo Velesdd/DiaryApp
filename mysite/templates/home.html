@@ -11,7 +11,7 @@
 {% endblock %}
 {% block links %}
             <div id="block-links">
-                     <div class="links" id="home">Posts</div>
+                     <div class="links" id="home" onclick="ClickOnHome()">Posts</div>
                     <!--<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus" style="font-size: 45px;">+</span></a>-->
                     <div class="links" id="gallery">Gallery</div>
                      <div class="links" id="goals">ToDo</div>
@@ -24,6 +24,12 @@
     <button class="button" id="button2" onclick="Up()"></button>
     {% endblock %}
 {% block image %}
-    <div id="close-image" onclick="Close()">✕</div>
-    <div class="view_image"></div>
+     <div class="background_shadow">
+  </div>
+  <div id="circle-close-image">
+        <div id="close-image" onclick="Close()">✕</div>
+    </div>
+  <div class="view_image">
+      <div id="img"></div>
+  </div>
 {% endblock %}
